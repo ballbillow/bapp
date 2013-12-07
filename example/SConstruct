@@ -1,0 +1,15 @@
+import os
+
+env = Environment(ENV=os.environ)
+
+env.Append(CCFLAGS = ['-Wall', '-Bstatic'])
+env.Append(CCFLAGS = '-I../../')
+
+env.Append(LIBPATH = ['../', '../../bnet'])
+env.Append(LIBS = ['bapp', 'bnet'])
+env.Append(LIBS = ['boost_system','boost_thread', 'boost_filesystem', 'boost_program_options'])
+env.Append(LIBS = ['glog','pthread'])
+
+env.Append(CCFLAGS = ['-O3', '-DNDEBUG'])
+env.Program("simple_app", Glob('*.cpp'))
+

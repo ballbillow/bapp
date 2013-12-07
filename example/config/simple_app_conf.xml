@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<simple_app>
+	<listen_ip>10.136.114.18</listen_ip>
+	<listen_port>2986</listen_port>
+</simple_app>
+
