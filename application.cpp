@@ -49,7 +49,7 @@ Error::ErrorType Application::Run( int argc, const char* argv[] )
     {
         return Error::BAPP_PROCESS_CMD_OPTION_ERROR;
     }
-	
+
 	google::InitGoogleLogging(app_name_.c_str());
     //初始化日志配置
     ret = LoadLogConfig();
@@ -112,8 +112,8 @@ Error::ErrorType Application::ProcessCmdOption( int argc, const char* argv[] )
         po::options_description desc("Allowed options");
         desc.add_options()
             ("help", "show help message")
-            ("tdrconfig", po::value<std::string>(&app_config_file_), "tdr config file, relatively path")
-            ("logconfig", po::value<std::string>(&glog_config_file_), "tlog config file, relatively path")
+            ("appconfig", po::value<std::string>(&app_config_file_), "app config file, relatively path")
+            ("logconfig", po::value<std::string>(&glog_config_file_), "glog config file, relatively path")
             ("daemon", "run as a daemon")
             ("reload", "reload service")
             ("stop", "stop service")
@@ -297,7 +297,7 @@ bnet::AsyncProcessor* Application::GetBaseProcessor()
 Error::ErrorType Application::LoadAppConfig()
 {
 	read_xml(app_config_file_, app_config_);
-	
+
 	return Error::BAPP_SUCCESS;
 }
 
