@@ -138,7 +138,7 @@ Error::ErrorType Application::ProcessCmdOption( int argc, const char* argv[] )
             if (pidfile.good())
             {
                 pidfile >> pid;
-                int ret = ::kill(pid, SIGRTMIN+1);
+                int ret = ::kill(pid, SIGUSR2);
 
                 if (-1 == ret)
                 {
@@ -236,7 +236,7 @@ void Application::InitSignal()
 {
     struct sigaction act;
     ::memset(&act, 0, sizeof(act));
-    ::sigemptyset(&act.sa_mask);
+    sigemptyset(&act.sa_mask);
 
     //stop
     act.sa_handler = StopSignal;
@@ -247,9 +247,7 @@ void Application::InitSignal()
 
     //reload
     act.sa_handler = ReloadSignal;
-    if(::sigaction(SIGUSR2, &act, NULL) < 0||
-       /*SIGUSR2被jdk里面占用了，坑爹啊*/
-       ::sigaction(SIGRTMIN+1, &act, NULL) < 0)
+    if(::sigaction(SIGUSR2, &act, NULL))
     {
         ::exit(errno);
     }

@@ -1,0 +1,3 @@
+[submodule "deps/bnet"]
+	path = deps/bnet
+	url = https://github.com/billowqiu/bnet.git
